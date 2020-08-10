@@ -88,7 +88,7 @@ class Airtable(OriginalAirtable):
         request_func = self._put if destructive else self._patch
 
         for chunk in self._chunk(records, self.MAX_RECORDS_PER_REQUEST):
-            new_records = [{'id': record_id, 'fields': fields} for record_id, fields in records]
+            new_records = [{'id': record_id, 'fields': fields} for record_id, fields in chunk]
 
             response = request_func(self.url_table, json_data={'records': new_records, 'typecast': typecast})
 
