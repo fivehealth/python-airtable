@@ -1,1 +1,1 @@
-from .airtable import Airtable  # noqa
+from .airtable_new import Airtable  # noqa

@@ -1,49 +1,47 @@
-# Airtable Python Wrapper
+# Python Airtable
 
-[![Build Status](https://travis-ci.com/gtalarico/airtable-python-wrapper.svg?branch=master)](https://travis-ci.com/gtalarico/airtable-python-wrapper)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/airtable-python-wrapper.svg?label=pypi%20downloads)](https://pypi.org/project/airtable-python-wrapper/)
-[![Coverage Status](https://coveralls.io/repos/github/gtalarico/airtable-python-wrapper/badge.svg?branch=master)](https://coveralls.io/github/gtalarico/airtable-python-wrapper?branch=master)
+[![PyPI version](https://img.shields.io/pypi/v/python-airtable.svg)](https://pypi.python.org/pypi/python-airtable/)
+[![PyPI license](https://img.shields.io/pypi/l/python-airtable.svg)](https://pypi.python.org/pypi/python-airtable/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/python-airtable.svg)](https://pypi.python.org/pypi/python-airtable/)
+[![PyPI status](https://img.shields.io/pypi/status/python-airtable.svg)](https://pypi.python.org/pypi/python-airtable/)
+[![PyPI download total](https://img.shields.io/pypi/dm/python-airtable.svg)](https://pypi.python.org/pypi/python-airtable/)
 [![Documentation Status](https://readthedocs.org/projects/airtable-python-wrapper/badge/?version=latest)](http://airtable-python-wrapper.readthedocs.io/en/latest/?badge=latest)
 
-Airtable API Client Wrapper for Python
-
-![project-logo](https://github.com/gtalarico/airtable-python-wrapper/blob/master/docs/source/_static/logo.png)
+This is a Python module for accessing Airtable largely based on the original [airtable-python-wrapper](https://github.com/gtalarico/airtable-python-wrapper/) by [Gui Talarico](https://github.com/gtalarico) with some modifications.
 
 ## Installing
 
 ```
-pip install airtable-python-wrapper
+pip install python-airtable
 ```
 
 ## Documentation
 
-Full documentation here:
-
-http://airtable-python-wrapper.readthedocs.io/
+Thee original full documentation is available [here](http://airtable-python-wrapper.readthedocs.io/).
 
 ### Usage Example
 
-Below are some of the methods available in the wrapper.
+```python
+from airtable import Airtable
 
-For the full list and documentation visit the [docs](http://airtable-python-wrapper.readthedocs.io/)
+# We updated the signature of `Airtable` class to support `airtable://` scheme URLs along with `view` and `sort` supported within the URLs.
+airtable = Airtable('airtable://app1234567890/table_name?view=My%20View&sort=ID')
 
-You can see the wrapper in action in this [Jupyter Notebook](https://github.com/gtalarico/airtable-python-wrapper/blob/master/Airtable.ipynb).
+for record_id, fields in airtable.iter_records():
+    print(f'Record ID: {record_id}, Fields: {fields}')
 
-```
-airtable = Airtable('baseKey', 'table_name')
-
-airtable.get_all(view='MyView', maxRecords=20)
+# Now you can get all the Airtable records as a big dictionary with record ID as keys
+airtable.get_all_as_dict()
 
 airtable.insert({'Name': 'Brian'})
+
+# We added `batch_insert` and support generators for the records arguments; chunking of records to 10 each is done automatically.
+airtable.batch_insert([record1, record2, ...])
+airtable.batch_update([(id1, record1), (id2, record2), ...))  # same for batch_update
 
 airtable.search('Name', 'Tom')
 
 airtable.update_by_field('Name', 'Tom', {'Phone': '1234-4445'})
 
 airtable.delete_by_field('Name', 'Tom')
-
 ```
-
-## License
-[MIT](https://opensource.org/licenses/MIT)
-
