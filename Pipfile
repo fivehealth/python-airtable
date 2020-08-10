@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+twine = "*"
+pytest = "*"
+pytest-cov = "*"
+coveralls = "*"
+flake8 = "*"
+mock = "*"
+tox-travis = "*"
+requests-mock = "*"
+
+[packages]
+requests = "*"
+six = "*"
+
+[requires]
+python_version = "3.8"
