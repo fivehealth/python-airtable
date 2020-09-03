@@ -1,6 +1,7 @@
 __all__ = ['Airtable']
 from itertools import islice
 import logging
+import os
 from time import sleep
 from urllib.parse import ParseResult
 from urllib.parse import parse_qs
@@ -31,6 +32,10 @@ class Airtable(OriginalAirtable):
 
         if not table_name:
             raise ValueError(f'Airtable table name not specified.')
+
+        # This behavior was removed by gtalarico/airtable-python-wrapper in https://github.com/gtalarico/airtable-python-wrapper/commit/e742a9abc11112e0dc1b8ae9f097bd4a72ae30e1
+        if api_key is None:
+            api_key = os.environ['AIRTABLE_API_KEY']
 
         self._base_key = u.netloc
 
