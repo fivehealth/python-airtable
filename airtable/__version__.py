@@ -1,4 +1,4 @@
-__version__ = "0.4"
+__version__ = "0.5"
 __name__ = "python-airtable"
 __description__ = "Python module for accessing Airtable (largely based on the original airtable-python-wrapper)."
 __url__ = "https://github.com/fivehealth/python-airtable"

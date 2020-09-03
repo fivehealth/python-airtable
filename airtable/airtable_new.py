@@ -1,10 +1,7 @@
 __all__ = ['Airtable']
 from itertools import islice
 import logging
-<<<<<<< HEAD
-=======
 import os
->>>>>>> gtalarico-master
 from time import sleep
 from urllib.parse import ParseResult
 from urllib.parse import parse_qs
